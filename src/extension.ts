@@ -14,7 +14,7 @@ export function activate(context: ExtensionContext) {
 					language: 'en',
 				},
 			};
-			const newUserSetting = await axios.put(
+			const newUserData = await axios.put(
 				'http://localhost:3000/user',
 				user,
 				{
@@ -28,8 +28,8 @@ export function activate(context: ExtensionContext) {
 				let position = editor?.selection.active;
 				const message =
 					`Hello ${user.name}\n` +
-					`Your settings are: darkMode: ${user.settings.darkMode}\n` +
-					` and language: ${user.settings.language}\n`;
+					`Your settings are: darkMode: ${newUserData.data.settings.darkMode}\n` +
+					` and language: ${newUserData.data.settings.language}\n`;
 				position && editBuilder.insert(position, message);
 			});
 		}
